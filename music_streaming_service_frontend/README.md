@@ -57,6 +57,21 @@ Common components include:
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+## Payments (Stripe placeholder)
+
+This template wires a placeholder Stripe checkout flow on the Account page:
+- Uses @stripe/stripe-js loadStripe with REACT_APP_STRIPE_PUBLIC_KEY.
+- Buttons "Subscribe" and "Manage Subscription" call a mock-enabled endpoint helper createCheckoutSession(type) which returns a fake session id in mock mode.
+- On success, it calls stripe.redirectToCheckout({ sessionId }).
+
+Notes:
+- If REACT_APP_STRIPE_PUBLIC_KEY is not set, the UI remains functional and shows a friendly inline message.
+- Mock API mode is enabled by default if REACT_APP_FEATURE_MOCK_API is missing or set to 'true'.
+
+Environment variables to set (example .env):
+- REACT_APP_STRIPE_PUBLIC_KEY=pk_test_xxx
+- REACT_APP_FEATURE_MOCK_API=true
+
 ### Code Splitting
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)

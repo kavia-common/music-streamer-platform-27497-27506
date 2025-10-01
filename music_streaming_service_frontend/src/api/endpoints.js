@@ -115,11 +115,21 @@ export async function me() {
 
 // Billing
 
+const MOCK_ENABLED = String(process.env.REACT_APP_FEATURE_MOCK_API || 'true').toLowerCase() === 'true' || String(process.env.REACT_APP_FEATURE_MOCK_API || '').toLowerCase() === '' || String(process.env.REACT_APP_FEATURE_MOCK_API || '').toLowerCase() === '1';
+
 // PUBLIC_INTERFACE
-export async function createCheckoutSession(payload = {}) {
+export async function createCheckoutSession(type = 'subscribe') {
   /** Create a Stripe checkout session (server returns sessionId and redirect URL).
-   * @param payload object
+   * @param type 'subscribe' | 'manage' (server may use to distinguish flows)
+   * @returns Promise<{ id: string } | { sessionId: string }>
    */
-  const res = await client.post(API_PATHS.billingCheckoutSession, payload);
-  return res.data;
+  // In mock mode, return a deterministic fake Stripe Checkout Session id
+  if (MOCK_ENABLED) {
+    return Promise.resolve({ id: 'cs_test_mock_123' });
+  }
+  const res = await client.post(API_PATHS.billingCheckoutSession, { type });
+  // Normalize possible shapes from server or mock router { sessionId } or { id }
+  const data = res.data || {};
+  const id = data.id || data.sessionId;
+  return id ? { id } : data;
 }
