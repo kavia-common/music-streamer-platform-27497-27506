@@ -219,3 +219,271 @@
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
+
+/* --- Common Ocean components --- */
+.o-btn {
+  --_btn-bg: var(--color-primary);
+  --_btn-color: #fff;
+  --_btn-border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  border-radius: 10px;
+  padding: .55rem .9rem;
+  border: 1px solid var(--_btn-border);
+  background: var(--_btn-bg);
+  color: var(--_btn-color);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+.o-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+.o-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.o-btn--primary { 
+  --_btn-bg: var(--color-primary); 
+  --_btn-color: #fff; 
+  --_btn-border: transparent; 
+}
+.o-btn--secondary { 
+  --_btn-bg: rgba(37,99,235,0.10); 
+  --_btn-color: var(--color-primary); 
+  --_btn-border: rgba(37,99,235,0.25);
+}
+.o-btn--ghost { 
+  --_btn-bg: transparent; 
+  --_btn-color: var(--color-text); 
+  --_btn-border: rgba(17,24,39,0.12);
+}
+
+.o-btn--sm { padding: .35rem .6rem; font-size: .9rem; }
+.o-btn--md { padding: .55rem .9rem; font-size: 1rem; }
+.o-btn--lg { padding: .75rem 1.1rem; font-size: 1.05rem; }
+.o-btn--block { width: 100%; }
+
+.o-btn__inner { display: inline-flex; align-items: center; gap: .5rem; }
+.o-btn__icon { display: inline-flex; }
+.o-btn__spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+}
+.o-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-top-color: rgba(255,255,255,1);
+  border-radius: 50%;
+  animation: o-spin 800ms linear infinite;
+}
+@keyframes o-spin { to { transform: rotate(360deg); } }
+
+/* Input */
+.o-field { display: grid; gap: .35rem; }
+.o-field__label { font-weight: 600; }
+.o-field__required { color: var(--color-error); margin-left: .15rem; }
+
+.o-input {
+  position: relative;
+  display: grid;
+  align-items: center;
+}
+.o-input.is-invalid .o-input__control {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
+}
+.o-input__adornment {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(17,24,39,0.6);
+}
+.o-input__adornment--left { left: .6rem; }
+.o-input__adornment--right { right: .6rem; }
+
+.o-input__control {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(17,24,39,0.12);
+  background: var(--color-surface);
+  padding: .55rem .75rem;
+  padding-left: calc(.75rem + (var(--_left-pad, 0)));
+  padding-right: calc(.75rem + (var(--_right-pad, 0)));
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.o-input__control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  outline: none;
+}
+
+/* If adornments exist, we can let callers add CSS custom properties to adjust padding if needed. */
+
+/* Field messaging */
+.o-field__help { font-size: .875rem; }
+.o-field__error { font-size: .875rem; color: var(--color-error); }
+
+/* Badge */
+.o-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .8rem;
+  padding: .25rem .5rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  background: rgba(17,24,39,0.06);
+  color: var(--color-text);
+}
+.o-badge__icon { display: inline-flex; }
+.o-badge--info { background: rgba(37,99,235,0.12); color: var(--color-primary); }
+.o-badge--success { background: rgba(16,185,129,0.12); color: #059669; }
+.o-badge--warning { background: rgba(245,158,11,0.18); color: var(--color-secondary); }
+.o-badge--error { background: rgba(239,68,68,0.12); color: var(--color-error); }
+.o-badge--neutral { background: rgba(17,24,39,0.08); color: var(--color-text); }
+
+/* --- Common Ocean components --- */
+.o-btn {
+  --_btn-bg: var(--color-primary);
+  --_btn-color: #fff;
+  --_btn-border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  border-radius: 10px;
+  padding: .55rem .9rem;
+  border: 1px solid var(--_btn-border);
+  background: var(--_btn-bg);
+  color: var(--_btn-color);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+.o-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+.o-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.o-btn--primary { 
+  --_btn-bg: var(--color-primary); 
+  --_btn-color: #fff; 
+  --_btn-border: transparent; 
+}
+.o-btn--secondary { 
+  --_btn-bg: rgba(37,99,235,0.10); 
+  --_btn-color: var(--color-primary); 
+  --_btn-border: rgba(37,99,235,0.25);
+}
+.o-btn--ghost { 
+  --_btn-bg: transparent; 
+  --_btn-color: var(--color-text); 
+  --_btn-border: rgba(17,24,39,0.12);
+}
+
+.o-btn--sm { padding: .35rem .6rem; font-size: .9rem; }
+.o-btn--md { padding: .55rem .9rem; font-size: 1rem; }
+.o-btn--lg { padding: .75rem 1.1rem; font-size: 1.05rem; }
+.o-btn--block { width: 100%; }
+
+.o-btn__inner { display: inline-flex; align-items: center; gap: .5rem; }
+.o-btn__icon { display: inline-flex; }
+.o-btn__spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+}
+.o-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-top-color: rgba(255,255,255,1);
+  border-radius: 50%;
+  animation: o-spin 800ms linear infinite;
+}
+@keyframes o-spin { to { transform: rotate(360deg); } }
+
+/* Input */
+.o-field { display: grid; gap: .35rem; }
+.o-field__label { font-weight: 600; }
+.o-field__required { color: var(--color-error); margin-left: .15rem; }
+
+.o-input {
+  position: relative;
+  display: grid;
+  align-items: center;
+}
+.o-input.is-invalid .o-input__control {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
+}
+.o-input__adornment {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(17,24,39,0.6);
+}
+.o-input__adornment--left { left: .6rem; }
+.o-input__adornment--right { right: .6rem; }
+
+.o-input__control {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(17,24,39,0.12);
+  background: var(--color-surface);
+  padding: .55rem .75rem;
+  padding-left: calc(.75rem + (var(--_left-pad, 0)));
+  padding-right: calc(.75rem + (var(--_right-pad, 0)));
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.o-input__control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  outline: none;
+}
+
+/* If adornments exist, we can let callers add CSS custom properties to adjust padding if needed. */
+
+/* Field messaging */
+.o-field__help { font-size: .875rem; }
+.o-field__error { font-size: .875rem; color: var(--color-error); }
+
+/* Badge */
+.o-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .8rem;
+  padding: .25rem .5rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  background: rgba(17,24,39,0.06);
+  color: var(--color-text);
+}
+.o-badge__icon { display: inline-flex; }
+.o-badge--info { background: rgba(37,99,235,0.12); color: var(--color-primary); }
+.o-badge--success { background: rgba(16,185,129,0.12); color: #059669; }
+.o-badge--warning { background: rgba(245,158,11,0.18); color: var(--color-secondary); }
+.o-badge--error { background: rgba(239,68,68,0.12); color: var(--color-error); }
+.o-badge--neutral { background: rgba(17,24,39,0.08); color: var(--color-text); }
