@@ -1,36 +1,24 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '../components/common';
+import { Button, Badge } from '../components/common';
 import { addPlaylist } from '../state/slices/librarySlice';
 import { setQueue, play } from '../state/slices/playerSlice';
-import Header from '../components/Header';
-import Section from '../components/Section';
-import PlaylistCard from '../components/PlaylistCard';
 
 /**
  * PUBLIC_INTERFACE
  * Home
- * Updated to mirror Figma "Spotify 1" with Ocean Professional theme.
+ * Landing page showcasing quick actions, recently played, and featured content.
+ * Uses mock data and connects to Redux for basic interactions.
  */
 export default function Home() {
   const dispatch = useDispatch();
   const { recent } = useSelector((s) => s.library);
   const { isPlaying } = useSelector((s) => s.player);
 
-  const focusItems = [
-    { id: 'f1', title: 'Peaceful Piano', description: 'Relax and indulge with beautiful piano pieces', image: '/assets/figma_image_0_48.png' },
-    { id: 'f2', title: 'Deep Focus', description: 'Keep calm and focus with ambient and post-rock music.' },
-    { id: 'f3', title: 'Instrumental Study', description: 'Focus with soft study music in the background.' },
-    { id: 'f4', title: 'Jazz Vibes', description: 'The original chill instrumental beats playlist.' },
-    { id: 'f5', title: 'Focus Flow', description: 'Uptempo instrumental hip hop beats.' },
-  ];
-
-  const spotifyPlaylists = [
-    { id: 's1', title: "Today's Top Hits", description: 'Ed Sheeran is on top of the Hottest 50!' },
-    { id: 's2', title: 'RapCaviar', description: 'New music from Roddy Ricch, Kodak Black, NLE Choppa and BIA.' },
-    { id: 's3', title: 'All Out 2010s', description: 'The biggest songs of the 2010s.' },
-    { id: 's4', title: 'Rock Classics', description: 'Rock legends & epic songs that continue to inspire generations.' },
-    { id: 's5', title: 'Chill Hits', description: 'Kick back to the best new and recent chill hits.' },
+  const featuredPlaylists = [
+    { id: 'f1', name: 'Focus Flow', description: 'Stay productive with deep focus beats.' },
+    { id: 'f2', name: 'Chill Vibes', description: 'Laid-back grooves to unwind.' },
+    { id: 'f3', name: 'Top Hits', description: 'The most popular tracks right now.' },
   ];
 
   const sampleTracks = [
@@ -39,7 +27,7 @@ export default function Home() {
     { id: 't3', title: 'Midnight Run', artist: 'City Nights', duration: 241 },
   ];
 
-  const playSample = () => {
+  const quickStart = () => {
     dispatch(setQueue({ queue: sampleTracks, startIndex: 0, autoplay: true }));
     dispatch(play());
   };
@@ -50,58 +38,50 @@ export default function Home() {
 
   return (
     <div className="container" style={{ paddingTop: 0 }}>
-      <Header
-        title="Focus"
-        actions={
-          <div style={{ display: 'flex', gap: '.5rem' }}>
-            <button
-              className="shadow-hover"
-              style={{ padding: '.45rem .8rem', borderRadius: '10px', background: 'var(--color-surface)', boxShadow: 'var(--shadow-sm)' }}
-              onClick={createSamplePlaylist}
-              aria-label="Create playlist"
-            >
-              Create Playlist
-            </button>
-            <button
-              className="shadow-hover"
-              style={{ padding: '.45rem .8rem', borderRadius: '10px', background: 'var(--color-primary)', color: '#fff' }}
-              onClick={playSample}
-              aria-label={isPlaying ? 'Pause' : 'Play something'}
-            >
-              {isPlaying ? '⏸ Pause' : '▶️ Play'}
-            </button>
-          </div>
-        }
-      />
+      <section className="card shadow-hover" aria-labelledby="home-quick">
+        <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '.5rem' }}>
+          <h2 id="home-quick" style={{ margin: 0 }}>Welcome back</h2>
+          <Badge variant="info" title="Ocean Professional theme">Ocean</Badge>
+        </header>
+        <p className="text-muted" style={{ marginTop: 0 }}>
+          Dive into music with a single click.
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+          <Button onClick={quickStart} leftIcon="▶️">
+            {isPlaying ? 'Keep Playing' : 'Play Something'}
+          </Button>
+          <Button variant="secondary" onClick={createSamplePlaylist} leftIcon="➕">
+            New Playlist
+          </Button>
+          <Button variant="ghost" as="a" href="/search" leftIcon="🔎" ariaLabel="Go to search">
+            Search Music
+          </Button>
+        </div>
+      </section>
 
-      <Section title="Focus" id="sec-focus" onShowAll={() => { /* TODO routes: /home/focus */ }}>
-        <div className="card-grid" role="list">
-          {focusItems.map((c) => (
-            <div key={c.id} role="listitem">
-              <PlaylistCard
-                image={c.image}
-                title={c.title}
-                description={c.description}
-                onPlay={playSample}
+      <section className="card shadow-hover" aria-labelledby="featured" style={{ marginTop: '1rem' }}>
+        <h3 id="featured" style={{ marginTop: 0 }}>Featured</h3>
+        <div
+          role="list"
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}
+        >
+          {featuredPlaylists.map((p) => (
+            <article role="listitem" key={p.id} className="surface shadow-hover" style={{ padding: '1rem' }}>
+              <div
+                aria-hidden="true"
+                style={{ width: '100%', height: 120, borderRadius: 10, background: 'rgba(37,99,235,0.12)', marginBottom: '.75rem' }}
               />
-            </div>
+              <strong>{p.name}</strong>
+              <p className="text-muted" style={{ marginTop: '.25rem' }}>{p.description}</p>
+              <div>
+                <Button size="sm" variant="secondary" leftIcon="▶️" onClick={() => quickStart()}>
+                  Play
+                </Button>
+              </div>
+            </article>
           ))}
         </div>
-      </Section>
-
-      <Section title="Spotify Playlists" id="sec-spotify-playlists" onShowAll={() => { /* TODO routes: /playlists */ }}>
-        <div className="card-grid" role="list">
-          {spotifyPlaylists.map((c) => (
-            <div key={c.id} role="listitem">
-              <PlaylistCard
-                title={c.title}
-                description={c.description}
-                onPlay={playSample}
-              />
-            </div>
-          ))}
-        </div>
-      </Section>
+      </section>
 
       <section className="card shadow-hover" aria-labelledby="recent" style={{ marginTop: '1rem' }}>
         <h3 id="recent" style={{ marginTop: 0 }}>Recently Played</h3>
@@ -117,7 +97,7 @@ export default function Home() {
                     <div className="text-muted" style={{ fontSize: '.9rem' }}>{t.artist}</div>
                   </div>
                   <div>
-                    <Button size="sm" variant="ghost" onClick={playSample} ariaLabel={`Play ${t.title} by ${t.artist}`}>▶️</Button>
+                    <Button size="sm" variant="ghost" onClick={() => quickStart()} ariaLabel={`Play ${t.title} by ${t.artist}`}>▶️</Button>
                   </div>
                 </div>
               </li>

@@ -1,10 +1,4 @@
 /* App layout scaffolding following layoutDescription */
-/* Ocean theme base import applied in index.js via theme.css */
-
-/* App layout scaffolding following layoutDescription */
-/* Ocean theme base import applied in index.js via theme.css */
-
-/* App layout scaffolding following layoutDescription */
 .app-shell {
   display: grid;
   grid-template-columns: 260px 1fr;
