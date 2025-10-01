@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Spotify 1 - Ocean Professional</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="screen spotify-1">
+    <!-- Left Sidebar -->
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand">
+        <div class="brand__logo" aria-hidden="true"></div>
+        <div class="brand__wordmark">Music Streamer</div>
+      </div>
+
+      <nav class="nav" aria-label="Main">
+        <a href="#" class="nav__item is-active">
+          <span class="nav__icon" aria-hidden="true">🏠</span>
+          <span class="nav__label">Home</span>
+        </a>
+        <a href="#" class="nav__item">
+          <span class="nav__icon" aria-hidden="true">🔎</span>
+          <span class="nav__label">Search</span>
+        </a>
+        <a href="#" class="nav__item">
+          <span class="nav__icon" aria-hidden="true">🎵</span>
+          <span class="nav__label">Your Library</span>
+        </a>
+      </nav>
+
+      <div class="sidebar__section">
+        <div class="sidebar__row">
+          <button class="o-btn o-btn--secondary o-btn--sm" id="btn-create-playlist">
+            <span class="o-btn__inner"><span class="o-btn__label">Create Playlist</span></span>
+          </button>
+        </div>
+        <div class="sidebar__row">
+          <span class="sidebar__link">Liked Songs</span>
+        </div>
+      </div>
+
+      <div class="sidebar__legal">
+        <div class="links">
+          <a href="#" class="legal__link">Legal</a>
+          <a href="#" class="legal__link">Privacy Center</a>
+          <a href="#" class="legal__link">Privacy Policy</a>
+          <a href="#" class="legal__link">Cookies</a>
+          <a href="#" class="legal__link">About Ads</a>
+        </div>
+        <button class="lang btn-chip" id="btn-lang">
+          <span aria-hidden="true">🌐</span>
+          <span>English</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <!-- Top utility strip (back/forward + auth) -->
+      <header class="topbar">
+        <div class="topbar__nav">
+          <button class="topbar__btn" aria-label="Go back">◀</button>
+          <button class="topbar__btn" aria-label="Go forward">▶</button>
+        </div>
+        <div class="topbar__actions">
+          <button class="link muted" id="btn-signup">Sign up</button>
+          <button class="o-btn o-btn--primary o-btn--sm" id="btn-login">
+            <span class="o-btn__inner"><span class="o-btn__label">Log in</span></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Section: Focus -->
+      <section class="section" aria-labelledby="sec-focus">
+        <div class="section__head">
+          <h2 id="sec-focus" class="section__title">Focus</h2>
+          <button class="link muted" data-action="show-all" data-section="focus">Show all</button>
+        </div>
+
+        <div class="card-grid" id="grid-focus">
+          <!-- Card 1 -->
+          <article class="card shadow-hover">
+            <div class="card__media"
+                 style="--media-bg: rgba(17,24,39,0.08)">
+              <img src="../../figmaimages/figma_image_0_48.png" alt="Peaceful Piano cover" />
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="Peaceful Piano">Peaceful Piano</div>
+              <div class="card__desc">Relax and indulge with beautiful piano pieces</div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card shadow-hover">
+            <div class="card__media"
+                 style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="Deep Focus">Deep Focus</div>
+              <div class="card__desc">Keep calm and focus with ambient and post-rock music.</div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card shadow-hover">
+            <div class="card__media"
+                 style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="Instrumental Study">Instrumental Study</div>
+              <div class="card__desc">Focus with soft study music in the background.</div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="card shadow-hover">
+            <div class="card__media"
+                 style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="Jazz Vibes">Jazz Vibes</div>
+              <div class="card__desc">
+                <button class="link" data-action="play" aria-label="Play Jazz Vibes">
+                  The original chill instrumental beats playlist.
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="card shadow-hover">
+            <div class="card__media"
+                 style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="Focus Flow">Focus Flow</div>
+              <div class="card__desc">Uptempo instrumental hip hop beats.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Section: Spotify Playlists -->
+      <section class="section" aria-labelledby="sec-spotify-playlists">
+        <div class="section__head">
+          <h2 id="sec-spotify-playlists" class="section__title">Spotify Playlists</h2>
+          <button class="link muted" data-action="show-all" data-section="spotify-playlists">Show all</button>
+        </div>
+
+        <div class="card-grid" id="grid-spotify">
+          <!-- Card 1 -->
+          <article class="card shadow-hover">
+            <div class="card__media" style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="Today's Top Hits">Today's Top Hits</div>
+              <div class="card__desc">Ed Sheeran is on top of the Hottest 50!</div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card shadow-hover">
+            <div class="card__media" style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="RapCaviar">RapCaviar</div>
+              <div class="card__desc">New music from Roddy Ricch, Kodak Black, NLE Choppa and BIA.</div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card shadow-hover">
+            <div class="card__media" style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="All Out 2010s">All Out 2010s</div>
+              <div class="card__desc">The biggest songs of the 2010s.</div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="card shadow-hover">
+            <div class="card__media" style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="Rock Classics">Rock Classics</div>
+              <div class="card__desc">Rock legends & epic songs that continue to inspire generations. Cover: Foo Fighters</div>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="card shadow-hover">
+            <div class="card__media" style="--media-bg: rgba(17,24,39,0.08)">
+              <div class="media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card__body">
+              <div class="card__title" title="Chill Hits">Chill Hits</div>
+              <div class="card__desc">Kick back to the best new and recent chill hits.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom docked promo strip -->
+    <div class="promo" role="region" aria-label="Promo">
+      <div class="promo__inner">
+        <div class="promo__text">
+          <div class="promo__title">Preview of Spotify</div>
+          <div class="promo__sub">Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.</div>
+        </div>
+        <button class="o-btn o-btn--primary o-btn--md" id="btn-signup-free">
+          <span class="o-btn__inner"><span class="o-btn__label">Sign up free</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
