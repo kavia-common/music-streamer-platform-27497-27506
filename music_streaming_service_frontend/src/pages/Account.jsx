@@ -1,7 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { Button, Badge } from '../components/common';
 import { loginSuccess, logout, setSubscription, updateProfile } from '../state/slices/userSlice';
+import useAuth from '../hooks/useAuth';
 
 /**
  * PUBLIC_INTERFACE
@@ -11,19 +13,28 @@ import { loginSuccess, logout, setSubscription, updateProfile } from '../state/s
 export default function Account() {
   const dispatch = useDispatch();
   const { isAuthenticated, profile, subscriptionStatus } = useSelector((s) => s.user);
+  const location = useLocation();
+  const { login } = useAuth();
+
+  const redirectedMessage = location.state?.message;
 
   const mockLogin = () => {
-    dispatch(
-      loginSuccess({
-        profile: {
-          id: 'u1',
-          name: 'Ocean User',
-          email: 'user@example.com',
-          avatarUrl: '',
-        },
-        subscriptionStatus: 'trial',
-      })
-    );
+    // Use our useAuth login to drive either OAuth or mock, then sync minimal Redux state for UI
+    login();
+    // For immediate UX in mock mode, also dispatch loginSuccess to reflect profile/subscription locally
+    if (!isAuthenticated) {
+      dispatch(
+        loginSuccess({
+          profile: {
+            id: 'u1',
+            name: 'Ocean User',
+            email: 'user@example.com',
+            avatarUrl: '',
+          },
+          subscriptionStatus: 'trial',
+        })
+      );
+    }
   };
 
   const mockConnectOAuth = () => {
@@ -42,6 +53,12 @@ export default function Account() {
 
   return (
     <div className="container" style={{ paddingTop: 0 }}>
+      {redirectedMessage ? (
+        <div className="surface" role="status" style={{ padding: '.75rem 1rem', marginBottom: '0.75rem', borderLeft: '4px solid var(--color-primary)' }}>
+          {redirectedMessage}
+        </div>
+      ) : null}
+
       <section className="card shadow-hover" aria-labelledby="acct-title">
         <h2 id="acct-title" style={{ marginTop: 0 }}>Account</h2>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -58,7 +75,7 @@ export default function Account() {
         </div>
         <div style={{ display: 'flex', gap: '.5rem', marginTop: '.75rem', flexWrap: 'wrap' }}>
           {!isAuthenticated ? (
-            <Button onClick={mockLogin} leftIcon="🔑">Sign in (Mock)</Button>
+            <Button onClick={mockLogin} leftIcon="🔑">Sign in</Button>
           ) : (
             <>
               <Button variant="secondary" onClick={mockConnectOAuth} leftIcon="🔗">Connect OAuth</Button>
