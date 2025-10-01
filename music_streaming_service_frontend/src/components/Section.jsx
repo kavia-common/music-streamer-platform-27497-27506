@@ -14,8 +14,8 @@ import React from 'react';
 export default function Section({ id, title, onShowAll, children }) {
   return (
     <section className="section" aria-labelledby={id}>
-      <div className="section__head" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-        <h2 id={id} className="section__title" style={{ fontSize: 20, fontWeight: 700, margin: 0 }}>
+      <div className="section__head">
+        <h2 id={id} className="section__title h2">
           {title}
         </h2>
         {onShowAll ? (

@@ -15,7 +15,7 @@ export default function PlaylistCard({ image, title, description, onPlay }) {
   return (
     <article
       className="shadow-hover"
-      style={{ background: 'var(--color-surface)', borderRadius: 12, overflow: 'hidden', position: 'relative' }}
+      style={{ background: 'var(--color-surface)', borderRadius: '12px', overflow: 'hidden', position: 'relative' }}
     >
       <div
         className="card__media"
@@ -28,24 +28,28 @@ export default function PlaylistCard({ image, title, description, onPlay }) {
         }}
       >
         {image ? (
-          <img src={image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img
+            src={image}
+            alt=""
+            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '0' }}
+          />
         ) : (
           <div
             aria-hidden="true"
-            style={{ width: '60%', height: '60%', borderRadius: 12, background: 'rgba(37,99,235,0.12)', boxShadow: 'inset 0 0 0 1px rgba(17,24,39,0.08)' }}
+            style={{ width: '60%', height: '60%', borderRadius: '12px', background: 'rgba(37,99,235,0.12)', boxShadow: 'inset 0 0 0 1px rgba(17,24,39,0.08)' }}
           />
         )}
       </div>
 
-      <div className="card__body" style={{ padding: '10px 12px 14px', display: 'grid', gap: 6 }}>
+      <div className="card__body" style={{ padding: '10px 12px 14px', display: 'grid', gap: '6px' }}>
         <div
           className="card__title"
           title={title}
-          style={{ fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+          style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
         >
           {title}
         </div>
-        {description ? <div className="card__desc" style={{ fontSize: '.92rem', color: 'rgba(17,24,39,0.7)' }}>{description}</div> : null}
+        {description ? <div className="card__desc">{description}</div> : null}
       </div>
 
       <button
@@ -55,10 +59,10 @@ export default function PlaylistCard({ image, title, description, onPlay }) {
         className="o-btn o-btn--primary o-btn--sm"
         style={{
           position: 'absolute',
-          right: 12,
-          bottom: 60,
-          width: 40,
-          height: 40,
+          right: '12px',
+          bottom: '62px',
+          width: '40px',
+          height: '40px',
           borderRadius: '50%',
           padding: 0,
           display: 'grid',

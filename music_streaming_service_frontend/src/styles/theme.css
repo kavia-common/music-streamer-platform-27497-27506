@@ -1,27 +1,68 @@
 :root {
-  --color-primary: #2563EB;
-  --color-secondary: #F59E0B;
+  /* Colors per Ocean Professional and Figma */
+  --color-primary: #2563EB;   /* Blue-600 */
+  --color-secondary: #F59E0B; /* Amber-500 */
+  --color-success: #10B981;   /* for badges/util if needed */
   --color-error: #EF4444;
-  --color-bg: #f9fafb;
-  --color-surface: #ffffff;
-  --color-text: #111827;
 
+  --color-bg: #f9fafb;        /* Gray-50 */
+  --color-surface: #ffffff;   /* White */
+  --color-text: #111827;      /* Gray-900 */
+
+  /* Shadows and radii tuned to Figma */
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.08); /* slightly stronger on hover for cards */
 
-  --radius: 12px;
+  --radius-xs: 8px;
+  --radius-sm: 10px;
+  --radius: 12px;             /* primary card/button radius */
+  --radius-lg: 16px;
+
   --transition: 200ms ease;
 
-  --gradient-header: linear-gradient(135deg, rgba(37,99,235,0.10), rgba(249,250,251,1));
+  /* Gradients and specific surfaces */
+  --gradient-header: linear-gradient(135deg, rgba(37,99,235,0.10) 0%, rgba(249,250,251,1) 100%);
+  --surface-border: 1px solid rgba(17,24,39,0.06);
+
+  /* Typography scale (from Figma) */
+  --font-h1-size: 28px;
+  --font-h1-line: 36px;
+  --font-h1-weight: 800;
+
+  --font-h2-size: 20px;
+  --font-h2-line: 28px;
+  --font-h2-weight: 700;
+
+  --font-card-title-size: 16px;
+  --font-card-title-line: 22px;
+  --font-card-title-weight: 700;
+
+  --font-subtle-size: 14px;
+  --font-subtle-line: 20px;
+
+  /* Layout/grid tokens */
+  --sidebar-width: 241px; /* matches Figma left nav */
+  --content-max: 1200px;
+  --promo-min-height: 66px; /* ~66-68px in Figma */
+
+  /* Spacing scale (px) */
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
 }
 
-/* Dark-ready variables */
 html[data-theme="dark"] {
   --color-bg: #0f172a;
   --color-surface: #0b1220;
   --color-text: #e5e7eb;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.35);
 }
 
 /* Base reset */
@@ -43,13 +84,49 @@ button { cursor: pointer; }
 ul, ol { padding: 0; margin: 0; list-style: none; }
 
 /* Utilities */
-.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+.container { max-width: var(--content-max); margin: 0 auto; padding: 1rem; }
 .surface { background: var(--color-surface); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
 .text-muted { color: rgba(17,24,39,0.7); }
 .gradient-header { background-image: var(--gradient-header); }
 .shadow-hover { transition: var(--transition); }
 .shadow-hover:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
 :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+/* Spacing utilities (gap/margins/paddings) */
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+.gap-12 { gap: var(--space-12); }
+.gap-16 { gap: var(--space-16); }
+.mt-0 { margin-top: 0; }
+.mt-8 { margin-top: var(--space-8); }
+.mt-12 { margin-top: var(--space-12); }
+.mt-16 { margin-top: var(--space-16); }
+.mb-12 { margin-bottom: var(--space-12); }
+.mb-16 { margin-bottom: var(--space-16); }
+.p-8 { padding: var(--space-8); }
+.p-12 { padding: var(--space-12); }
+.px-12 { padding-left: var(--space-12); padding-right: var(--space-12); }
+.py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+
+/* Typography utilities */
+.h1 {
+  font-size: var(--font-h1-size);
+  line-height: var(--font-h1-line);
+  font-weight: var(--font-h1-weight);
+  margin: 0;
+}
+.h2, .section__title {
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-line);
+  font-weight: var(--font-h2-weight);
+  margin: 0;
+}
+.card__title {
+  font-size: var(--font-card-title-size);
+  line-height: var(--font-card-title-line);
+  font-weight: var(--font-card-title-weight);
+}
+.card__desc, .subtle { font-size: var(--font-subtle-size); line-height: var(--font-subtle-line); }
 
 /* Buttons (Ocean) */
 .o-btn {
@@ -61,7 +138,7 @@ ul, ol { padding: 0; margin: 0; list-style: none; }
   align-items: center;
   justify-content: center;
   gap: .5rem;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: .55rem .9rem;
   border: 1px solid var(--_btn-border);
   background: var(--_btn-bg);
@@ -79,32 +156,43 @@ ul, ol { padding: 0; margin: 0; list-style: none; }
 .o-btn--lg { padding: .75rem 1.1rem; font-size: 1.05rem; }
 .o-btn--block { width: 100%; }
 .o-btn__inner { display: inline-flex; align-items: center; gap: .5rem; }
-.o-btn__spinner { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(255,255,255,0.25); border-radius: 10px; }
+.o-btn__spinner { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(255,255,255,0.25); border-radius: var(--radius-sm); }
 .o-spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.6); border-top-color: rgba(255,255,255,1); border-radius: 50%; animation: o-spin 800ms linear infinite; }
 @keyframes o-spin { to { transform: rotate(360deg); } }
 
-/* Cards */
-.card { background: var(--color-surface); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-
-/* PlayerBar controls shared */
-.btn-icon { padding: .4rem .6rem; border-radius: 10px; background: var(--color-surface); }
-.btn-icon.is-active { background: rgba(37,99,235,0.12); color: var(--color-primary); }
-.btn-primary { background: var(--color-primary); color: #fff; }
-
-/* Section header semantics (from Figma reference) */
-.section { margin-bottom: 18px; }
-.section__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.section__title { font-size: 20px; font-weight: 700; margin: 0; }
+/* Links */
 .link { background: transparent; border: 0; color: var(--color-text); text-decoration: none; cursor: pointer; }
 .link.muted { color: rgba(17,24,39,0.7); }
 .link.muted:hover { color: var(--color-primary); }
 
-/* Grid for sections (Figma-like) */
+/* Cards and grids */
+.card { background: var(--color-surface); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(175px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(5, 200px); /* fixed card width for pixel accuracy */
+  gap: var(--space-16);
 }
+@media (max-width: 1200px) { .card-grid { grid-template-columns: repeat(5, minmax(175px, 1fr)); } }
 @media (max-width: 1100px) { .card-grid { grid-template-columns: repeat(4, minmax(160px, 1fr)); } }
-@media (max-width: 900px) { .card-grid { grid-template-columns: repeat(3, minmax(150px, 1fr)); } }
-@media (max-width: 640px) { .card-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); } }
+@media (max-width: 900px)  { .card-grid { grid-template-columns: repeat(3, minmax(150px, 1fr)); } }
+@media (max-width: 640px)  { .card-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); } }
+
+/* PlayerBar shared icon buttons */
+.btn-icon { padding: .4rem .6rem; border-radius: var(--radius-sm); background: var(--color-surface); }
+.btn-icon.is-active { background: rgba(37,99,235,0.12); color: var(--color-primary); }
+.btn-primary { background: var(--color-primary); color: #fff; }
+
+/* Section header semantics */
+.section { margin-bottom: var(--space-18); }
+.section__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-12); }
+.section__title { /* already styled via .h2 above */ }
+
+/* Header and promo bar exact sizing helpers */
+.header-strip { padding: 12px 16px; border-radius: var(--radius); }
+.promo__inner { min-height: var(--promo-min-height); padding: 10px 16px; }
+
+/* Fixed card sizing utility when needed */
+.card--fixed { width: 200px; }
+
+/* Fixed card sizing utility when needed */
+.card--fixed { width: 200px; }

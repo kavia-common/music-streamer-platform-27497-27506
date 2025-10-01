@@ -12,24 +12,22 @@ import React from 'react';
 export default function Header({ title, actions = null }) {
   return (
     <header
-      className="surface gradient-header"
+      className="surface gradient-header header-strip"
       style={{
         position: 'sticky',
         top: 0,
         zIndex: 10,
-        padding: '0.75rem 1rem',
-        borderRadius: '12px',
-        marginBottom: '1rem',
+        marginBottom: '16px',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '.75rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
         <div>
-          <div style={{ fontWeight: 700 }}>{title}</div>
-          <div className="text-muted" style={{ fontSize: '.9rem' }}>
+          <div className="h2">{title}</div>
+          <div className="text-muted subtle">
             Ocean Professional
           </div>
         </div>
-        {actions ? <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>{actions}</div> : null}
+        {actions ? <div style={{ display: 'flex', alignItems: 'center' }} className="gap-8">{actions}</div> : null}
       </div>
     </header>
   );
