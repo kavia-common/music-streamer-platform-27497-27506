@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+// Router renders the route elements and expects a Router provider (BrowserRouter) to be mounted above (see index.js)
 import Router from './routes/Router';
 import Sidebar from './components/layout/Sidebar';
 import TopBar from './components/layout/TopBar';

@@ -1,11 +1,11 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useRoutes, Navigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 /**
  * PUBLIC_INTERFACE
  * Router
- * Defines all app routes with code-splitting using React.lazy.
+ * Defines route elements (without owning BrowserRouter). Use inside a Router provider.
  * Pages are implemented under src/pages with Ocean Professional styling.
  */
 
@@ -16,11 +16,12 @@ const PlaylistPage = lazy(() => import('../pages/PlaylistDetail'));
 const AccountPage = lazy(() => import('../pages/Account'));
 
 /**
+ * PUBLIC_INTERFACE
  * ProtectedRoute
  * Guards child routes by requiring authentication. Redirects to /account
  * with a friendly message passed via location state.
  */
-function ProtectedRoute({ children }) {
+export function ProtectedRoute({ children }) {
   const { isAuthenticated, initializing } = useAuth();
   const location = useLocation();
 
@@ -50,38 +51,38 @@ function ProtectedRoute({ children }) {
 
 // PUBLIC_INTERFACE
 export default function Router() {
+  const elements = useRoutes([
+    { path: '/', element: <HomePage /> },
+    { path: '/search', element: <SearchPage /> },
+    {
+      path: '/library',
+      element: (
+        <ProtectedRoute>
+          <LibraryPage />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/playlist/:id',
+      element: (
+        <ProtectedRoute>
+          <PlaylistPage />
+        </ProtectedRoute>
+      ),
+    },
+    { path: '/account', element: <AccountPage /> },
+    { path: '*', element: <Navigate to="/" replace /> },
+  ]);
+
   return (
-    <BrowserRouter>
-      <Suspense
-        fallback={
-          <div className="surface" style={{ padding: '1rem', borderRadius: '12px' }}>
-            Loading...
-          </div>
-        }
-      >
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route
-            path="/library"
-            element={
-              <ProtectedRoute>
-                <LibraryPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/playlist/:id"
-            element={
-              <ProtectedRoute>
-                <PlaylistPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/account" element={<AccountPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Suspense
+      fallback={
+        <div className="surface" style={{ padding: '1rem', borderRadius: '12px' }}>
+          Loading...
+        </div>
+      }
+    >
+      {elements}
+    </Suspense>
   );
 }

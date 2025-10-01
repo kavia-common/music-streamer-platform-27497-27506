@@ -18,6 +18,8 @@ import React from 'react';
  *  - children?: ReactNode
  *  - className?: string (additional classes)
  *  - ariaLabel?: string (optional explicit aria-label)
+ *  - as?: string | React.Component (e.g., 'a') to render as a different element
+ *  - href?: string (used when as='a')
  */
 export default function Button({
   variant = 'primary',
@@ -32,6 +34,8 @@ export default function Button({
   children,
   className = '',
   ariaLabel,
+  as,
+  href,
   ...rest
 }) {
   const isDisabled = disabled || loading;
@@ -46,7 +50,42 @@ export default function Button({
     .join(' ');
 
   // If no textual children and icons exist, ensure accessible name via aria-label
-  const computedAriaLabel = ariaLabel || (typeof children === 'string' ? undefined : (rest['aria-label'] || rest['ariaLabel']));
+  const computedAriaLabel =
+    ariaLabel ||
+    (typeof children === 'string' ? undefined : rest['aria-label'] || rest['ariaLabel']);
+
+  // Support rendering as anchor when requested
+  if (as === 'a') {
+    return (
+      <a
+        className={classes}
+        href={href}
+        aria-busy={loading || undefined}
+        aria-label={computedAriaLabel}
+        onClick={onClick}
+        {...rest}
+      >
+        <span className="o-btn__inner">
+          {leftIcon ? (
+            <span className="o-btn__icon o-btn__icon--left" aria-hidden="true">
+              {leftIcon}
+            </span>
+          ) : null}
+          <span className="o-btn__label">{children}</span>
+          {rightIcon ? (
+            <span className="o-btn__icon o-btn__icon--right" aria-hidden="true">
+              {rightIcon}
+            </span>
+          ) : null}
+        </span>
+        {loading ? (
+          <span className="o-btn__spinner" aria-hidden="true">
+            <span className="o-spinner" />
+          </span>
+        ) : null}
+      </a>
+    );
+  }
 
   return (
     <button
@@ -60,9 +99,17 @@ export default function Button({
     >
       {/* Content layout */}
       <span className="o-btn__inner">
-        {leftIcon ? <span className="o-btn__icon o-btn__icon--left" aria-hidden="true">{leftIcon}</span> : null}
+        {leftIcon ? (
+          <span className="o-btn__icon o-btn__icon--left" aria-hidden="true">
+            {leftIcon}
+          </span>
+        ) : null}
         <span className="o-btn__label">{children}</span>
-        {rightIcon ? <span className="o-btn__icon o-btn__icon--right" aria-hidden="true">{rightIcon}</span> : null}
+        {rightIcon ? (
+          <span className="o-btn__icon o-btn__icon--right" aria-hidden="true">
+            {rightIcon}
+          </span>
+        ) : null}
       </span>
 
       {loading ? (

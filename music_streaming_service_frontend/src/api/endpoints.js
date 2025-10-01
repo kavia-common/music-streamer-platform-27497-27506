@@ -115,7 +115,8 @@ export async function me() {
 
 // Billing
 
-const MOCK_ENABLED = String(process.env.REACT_APP_FEATURE_MOCK_API || 'true').toLowerCase() === 'true' || String(process.env.REACT_APP_FEATURE_MOCK_API || '').toLowerCase() === '' || String(process.env.REACT_APP_FEATURE_MOCK_API || '').toLowerCase() === '1';
+const MOCK_STR = String(process.env.REACT_APP_FEATURE_MOCK_API ?? 'true').toLowerCase();
+const MOCK_ENABLED = MOCK_STR === 'true' || MOCK_STR === '' || MOCK_STR === '1';
 
 // PUBLIC_INTERFACE
 export async function createCheckoutSession(type = 'subscribe') {

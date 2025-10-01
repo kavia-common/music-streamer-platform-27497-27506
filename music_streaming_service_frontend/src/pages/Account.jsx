@@ -34,7 +34,7 @@ export default function Account() {
       console.warn('Stripe initialization failed:', e);
       return null;
     }
-  }, []);
+  }, [process.env.REACT_APP_STRIPE_PUBLIC_KEY]);
 
   const redirectedMessage = location.state?.message;
 
