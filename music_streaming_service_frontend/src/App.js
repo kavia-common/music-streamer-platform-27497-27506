@@ -3,6 +3,7 @@ import './App.css';
 import Router from './routes/Router';
 import Sidebar from './components/layout/Sidebar';
 import TopBar from './components/layout/TopBar';
+import PlayerBar from './components/player/PlayerBar';
 
 // PUBLIC_INTERFACE
 function App() {
@@ -54,27 +55,9 @@ function App() {
         <Router />
       </main>
 
-      {/* Bottom player bar placeholder (unchanged) */}
+      {/* Bottom player bar */}
       <div className="player">
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem' }}>
-            <div className="surface" style={{ width: 44, height: 44, borderRadius: 8 }} />
-            <div>
-              <div style={{ fontWeight: 600 }}>Track title</div>
-              <div className="text-muted" style={{ fontSize: '.85rem' }}>Artist</div>
-            </div>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-            <button className="shadow-hover" style={{ padding: '.4rem .7rem', borderRadius: 10 }}>⏮</button>
-            <button className="shadow-hover" style={{ padding: '.5rem 1rem', borderRadius: 10, background: 'var(--color-primary)', color: 'white' }}>⏯</button>
-            <button className="shadow-hover" style={{ padding: '.4rem .7rem', borderRadius: 10 }}>⏭</button>
-          </div>
-          <div style={{ minWidth: 160 }}>
-            <div className="surface" style={{ height: 8, borderRadius: 999, overflow: 'hidden' }}>
-              <div style={{ width: '35%', height: '100%', background: 'var(--color-primary)' }} />
-            </div>
-          </div>
-        </div>
+        <PlayerBar />
       </div>
     </div>
   );
